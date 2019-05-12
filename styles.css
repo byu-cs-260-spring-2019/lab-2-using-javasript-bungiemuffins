@@ -1,0 +1,15 @@
+div.titleHeader {
+    font-family: 'Abel', sans-serif;
+    background-image: url(images/headerBackground.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-attachment: fixed;
+    margin: 0;
+    height: 325px;
+}
+
+div h1 {
+    font-size: 100px;
+    padding-bottom: 0;
+    padding-top: 220px;
+}
