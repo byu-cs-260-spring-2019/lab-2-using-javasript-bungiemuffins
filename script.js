@@ -18,12 +18,15 @@ window.onload = function() {
             let results = "";
             //try to change background pic.
             var today = new Date();
-            var time = today.getHours;
+            var time = today.getHours();
             var night = false;
             var weatherDescriptor = json.weather[0].main;
             var weatherImageURL = "";
-            if(time >= 21 && time <= 5) {
+            if(time >= 22 || time <= 5) {
                 night = true;
+            }
+            else{
+                night = false;
             }
             switch(weatherDescriptor) {
                 case 'Clear':
@@ -42,18 +45,18 @@ window.onload = function() {
                     weatherImageURL += 'clearSky';
                     break;
             }
-            if(night = true){
+            if(night == true){
                 weatherImageURL += 'Night';
             }
             else{
-                weatherImageURl += 'Day';
+                weatherImageURL += 'Day';
             }
-            results += '<div class="weatherContainer" style="background-image: url(images/' + weatherImageURL + '.jpg)">';
+            results += '<div class="weatherContainerHeader" style="background-image: url(images/' + weatherImageURL + '.jpg)">';
 
 
             results += '<h2>Weather in ' + json.name + "</h2>";
             for (let i=0; i < json.weather.length; i++) {
-                results += '<img src="http://openweathermap.org/img/w/' + json.weather[i].icon + '.png"/>';
+                results += '<img class="imgIcon" src="http://openweathermap.org/img/w/' + json.weather[i].icon + '.png"/>';
             }
             results += '<h2>' + json.main.temp + " &deg;F</h2>"
             results += "<p>"
@@ -85,13 +88,13 @@ window.onload = function() {
             for (let i = 0; i <json.list.length; i++){
                 //looping to get the background pic for each forecast
                 var night = false;
-                var weatherImageURL = "";
+                var weatherImageURL = '';
                 var date = json.list[i].dt_txt;
                 var time = '';
                 time += date.charAt(11);
                 time += date.charAt(12);
-                var weatherDescriptor = json.list[i].weather.main;
-                if(time >= 21 && time <= 5) {
+                var weatherDescriptor = json.list[i].weather[0].main;
+                if(time >= 22 || time <= 5) {
                     night = true;
                 }
                 switch(weatherDescriptor) {
@@ -111,18 +114,18 @@ window.onload = function() {
                         weatherImageURL += 'clearSky';
                         break;
                 }
-                if(night = true){
+                if(night == true){
                     weatherImageURL += 'Night';
                 }
                 else{
-                    weatherImageURl += 'Day';
+                    weatherImageURL += 'Day';
                 }
     
                 forecast += '<div class="weatherContainer" style="background-image: url(images/' + weatherImageURL + '.jpg)">';
                 //forecast content
                 forecast += "<h2>" + moment(json.list[i].dt_txt).format('MMMM Do YYYY, h:mm:ss a') + "</h2>";
                 forecast += "<p>Temperature: " + json.list[i].main.temp + "</p>";
-                forecast += '<img src="http://openweathermap.org/img/w/' + json.list[i].weather[0].icon + '.png"/>'
+                forecast += '<img class="imgIcon" src="http://openweathermap.org/img/w/' + json.list[i].weather[0].icon + '.png"/>'
 
                 forecast += "</div>";
             }
